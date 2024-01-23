@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    command: gunicorn stady1.wsgi:application --bind 0.0.0.0:8000
+    expose:
+      - 8000
+    volumes:
+      - static_path:/app/stady1/static
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1
+      - POSTGRES_DB=stady1db
+  nginx:
+    build: ./nginx
+    ports:
+      - 8080:80
+    volumes:
+      - static_path:/app/stady1/static
+    depends_on:
+      - web
+
+volumes:
+  postgres_data:
+  static_path:
