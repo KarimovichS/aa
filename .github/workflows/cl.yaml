@@ -2,10 +2,10 @@ name: stady1 project
 on:
   push:
     branches:
-      - master
+      - main
     pull_request:
       branches:
-        - master
+        - main
 
 jobs:
   first:
