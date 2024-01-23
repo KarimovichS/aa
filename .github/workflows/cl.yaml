@@ -1,5 +1,8 @@
 name: stady1 project
-on: push
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   first:
