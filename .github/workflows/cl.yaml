@@ -32,7 +32,13 @@ jobs:
         run: pip install -r re.txt
       - name: Run test
         env:
-          DJANGO_SETTINGS_MODULE: stady1.settings.local
-          SECRET_KEY: django-insecure-ktrohk9cwg*2u*t3exj6y=d4aj9!@oq%sowvhwxuzjexc)0vpp
+          DJANGO_SETTINGS_MODULE : stady1.settings.local
+          SECRET_KEY : django-insecure-ktrohk9cwg*2u*t3exj6y=d4aj9!@oq%sowvhwxuzjexc)0vpp
+          SQL_ENGINE: django.db.backends.postgresql
+          SQL_DATABASE: stady1db
+          SQL_USER: postgres
+          SQL_PASSWORD: 1
+          SQL_HOST: localhost
+          SQL_PORT: 5432
         run: python manage.py test
 
