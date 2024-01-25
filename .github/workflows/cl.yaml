@@ -41,7 +41,7 @@ jobs:
           SQL_HOST: localhost
           SQL_PORT: 5432
 
-        run:
+        run: |
           python manage.py test 
           python manage.py migrate
 
