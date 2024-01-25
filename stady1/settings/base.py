@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'web1.apps.Web1Config',
+    'django_extensions',
 
 ]
 

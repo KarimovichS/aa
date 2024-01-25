@@ -10,9 +10,17 @@ menu = [
     {'title': 'royxatdan otish', 'url_name': 'login'},
 ]
 data_db = [
-    {'id': 1, 'title': 'sardor shukurov', 'content': '''<h1>shukurov sardor</h1> 21.09.2003 termiz shahar. 15 maktab G sinf oquvchisi. litsey talabasi hozirda tatu talabasi''', 'is_published': True},
+    {'id': 1, 'title': 'sardor shukurov',
+     'content': '''<h1>shukurov sardor</h1> 21.09.2003 termiz shahar. 15 maktab G sinf oquvchisi. litsey talabasi hozirda tatu talabasi''',
+     'is_published': True},
     {'id': 2, 'title': 'akmal omonturdiyev', 'content': 'uning yashash tarixi', 'is_published': False},
     {'id': 3, 'title': 'timur shukurov', 'content': 'uning yashash tarixi', 'is_published': True},
+]
+
+cats_db = [
+    {'id': 1, 'name': 'Aktiyor'},
+    {'id': 2, 'name': 'Qoshiqchi'},
+    {'id': 3, 'name': 'Sportchi'}
 ]
 
 
@@ -21,7 +29,8 @@ def index(request):
     # return HttpResponse(t)
     data = {'title': 'bosh menyu',
             'menu': menu,
-            'posts': data_db
+            'posts': data_db,
+            'cat_selected':0,
             }
     return render(request, 'web1/index.html', context=data)
 
@@ -44,6 +53,15 @@ def contact(request):
 
 def login(request):
     return HttpResponse('royxatdan otish')
+
+
+def show_category(request, cat_id):
+    data = {'title': 'rubrik orqali korsatish',
+            'menu': menu,
+            'posts': data_db,
+            'cat_selected': cat_id,
+            }
+    return render(request, 'web1/index.html', context=data)
 
 
 def page_not_found(request, exception):
