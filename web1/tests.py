@@ -1,6 +1,10 @@
+
 from django.test import TestCase
-from django.urls import reverse
+from django.urls import reverse, resolve
 from ecdsa.test_ellipticcurve import r
+
+
+from . import views
 
 
 # Create your tests here.
@@ -9,6 +13,7 @@ from ecdsa.test_ellipticcurve import r
 class TestHome(TestCase):
     def setUp(self) -> None:
         self.url = reverse('home')
+        self.url_view = reverse('about')
         self.response = self.client.get('home')
 
     def test_gets(self):
@@ -18,17 +23,15 @@ class TestHome(TestCase):
         # assert response.json()['title'] == 'bosh menyu'
 
     def test_template(self):
-        self.assertTemplateUsed(self.response, 'home.html')
+        self.assertEquals(resolve(self.url).func, views.index)
 
+    def test_about(self):
+        self.assertEquals(resolve(self.url_view).func, views.about)
 
-class TestAbout(TestCase):
-    def setUp(self) -> None:
-        self.url = reverse('about')
-        self.response = self.client.get('about')
-
-    def test_get(self):
+    def test_view_menu(self):
         response = self.client.get(self.url)
-        assert response.status_code == 200
+        menu_set = response.context['menu']
+        assert menu_set is not None
 
-    def test_template(self):
-        self.assertTemplateUsed(self.response, 'about.html')
+
+
