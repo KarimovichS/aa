@@ -40,5 +40,8 @@ jobs:
           SQL_PASSWORD: 1
           SQL_HOST: localhost
           SQL_PORT: 5432
-        run: python manage.py test
+
+        run:
+          python manage.py test
+          python manage.py migrate
 
